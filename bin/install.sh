@@ -27,4 +27,11 @@ echo "end install govendor..."
 
 echo "start govendor sync -v..."
 govendor sync -v
+echo "end govendor sync -v..."
+
+echo "start go build ..."
+go build -o cosme .
+ls -la cosme 
+echo "end go build ..."
+
 echo "completed !!!"
