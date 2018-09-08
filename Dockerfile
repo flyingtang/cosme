@@ -5,7 +5,17 @@ WORKDIR ${GOPATH}/src/cosme
 
 COPY . .
 
-RUN sh bin/install.sh
+RUN apk add git \
+    && rootdir=`pwd` \
+    && golangpath="$rootdir/vendor/golang.org/x"  \
+    && ls -la $golangpath && rm -rf "$rootdir/vendor/golang.org" \
+    &&  mkdir -p  $golangpath &&  cd $golangpath \
+    && git clone https://github.com/golang/crypto.git && git clone https://github.com/golang/sys.git \
+    && cd $rootdir \
+    && go get -u github.com/kardianos/govendor \
+    && govendor sync -v  \ 
+    &&  go build -o cosme . && ls -la cosme\
+    && echo "completed !!!"
 
 CMD ["./cosme"]
 
