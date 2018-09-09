@@ -8,7 +8,7 @@ COPY . .
 RUN apk add git \
     && rootdir=`pwd` \
     && golangpath="$rootdir/vendor/golang.org/x"  \
-    && mkdir -rf $golangpath && ls -la $golangpath && cd $golangpath \
+    && mkdir -p $golangpath && ls -la $golangpath && cd $golangpath \
     && git clone https://github.com/golang/crypto.git && git clone https://github.com/golang/sys.git \
     && cd $rootdir \
     && go get -u github.com/kardianos/govendor \
