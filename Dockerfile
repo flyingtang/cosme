@@ -1,7 +1,7 @@
-FROM golang:1.11-alpine
+FROM golang:1.11-alpine as buildgolang
 
-ENV GOPATH=/go
-WORKDIR ${GOPATH}/src/cosme
+
+WORKDIR /go/src/cosme
 
 COPY . .
 
@@ -17,6 +17,8 @@ RUN apk add git \
     &&  go build -o cosme . && ls -la cosme\
     && echo "completed !!!"
 
-CMD ["./cosme"]
 
-EXPOSE 3000
+FROM golang:1.11-alpine
+WORKDIR /go/src/
+COPY --from=buildgolang  /go/src/cosme/cosme /go/src/cosme 
+CMD [ "./cosme" ]

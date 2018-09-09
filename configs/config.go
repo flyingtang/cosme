@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+
 	"github.com/sirupsen/logrus"
 )
 
@@ -21,7 +22,7 @@ type MySQL struct {
 }
 
 type Config struct {
-	MySQL MySQL
+	MySQL    MySQL
 	HttpAddr string // 监听地址
 	HttpPort string // 监听端口
 }
@@ -31,10 +32,11 @@ var SySConfig *Config
 // 方法
 func ParseConfigFile() {
 	configPath := fmt.Sprintf("configs/%s.config.json", commands.Env)
+	logrus.Info("configPath : ", configPath)
 	data, err := ioutil.ReadFile(configPath)
-
+	
 	if err != nil {
-		log.Fatal("ioutil.ReadFile read config file failed...")
+		log.Fatal("ioutil.ReadFile read config file failed...", err.Error())
 	}
 
 	if SySConfig == nil {

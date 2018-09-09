@@ -1,0 +1,21 @@
+workspace:
+  base: /go
+  path: /src/cosme
+
+pipeline:
+    publish:
+      image: plugins/docker
+      repo: ccr.ccs.tencentyun.com/mengtang/cosme
+      registry: ccr.ccs.tencentyun.com
+      username: 715709084
+      password: tt1234567890
+      auto_tag: true
+    rancher-deploy:
+        image: peloton/drone-rancher
+        url: http://tx.ixiaotang.cn:8080
+        access_key: CAC2754EF6540902FC96
+        secret_key: ocWnnyQw2wcVERPox3nerdbzMSpBbhTVpmZWFEfg
+        service: cosme/cosme
+        docker_image: ccr.ccs.tencentyun.com/mengtang/cosme::latest
+        confirm: true
+        timeout: 180
