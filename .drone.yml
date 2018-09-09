@@ -9,6 +9,7 @@ pipeline:
       registry: ccr.ccs.tencentyun.com
       username: 715709084
       password: tt1234567890
+      force_tag: false
       auto_tag: true
     rancher-deploy:
         image: peloton/drone-rancher
@@ -16,6 +17,6 @@ pipeline:
         access_key: CAC2754EF6540902FC96
         secret_key: ocWnnyQw2wcVERPox3nerdbzMSpBbhTVpmZWFEfg
         service: cosme/cosme
-        docker_image: ccr.ccs.tencentyun.com/mengtang/cosme::latest
+        docker_image: ccr.ccs.tencentyun.com/mengtang/cosme:latest
         confirm: true
         timeout: 180
